@@ -246,7 +246,7 @@ let b = [-1, 120, -1, 100, -1, -1, 80, 60, -1, 200, 90, -1, 2];
 // Missing Letters
 
 const missingLetters = (letters) => {
-  let missingCode = 0;
+  let missingCode = 0
 
   if (letters.charCodeAt(0) !== 97) {
     return "a";
@@ -268,6 +268,38 @@ const missingLetters = (letters) => {
   }
 };
 
-console.log(missingLetters("abce")); // 'd'
-console.log(missingLetters("abcdefghjklmno")); // 'i'
-console.log(missingLetters("abcdefghijklmnopqrstuvwxyz")); // undefined
+const missingLetters2 = (str) => {
+  let compare = str.charCodeAt(0)
+  let missing
+
+  str.split('').map((char, i) => {
+    if (str.charCodeAt(i) == compare){
+      ++compare
+    } else {
+      missing = String.fromCharCode(compare)
+    }
+  })
+  return missing
+}
+
+//console.log(missingLetters2("abce")); // 'd'
+//console.log(missingLetters2("abcdefghjklmno")); // 'i'
+//console.log(missingLetters2("abcdefghijklmnopqrstuvwxyz")); // undefined
+
+
+// Even and Odd Sums
+
+// evenOddSums([50, 60, 60, 45, 71]) == [170, 116]
+
+const evenOddSums = (arr) => {
+  let oddSum = 0
+  let evenSum = 0
+  for(let num of arr){
+    (num % 2) === 0 ? evenSum += num : oddSum += num
+  }
+  return [evenSum, oddSum]
+}
+
+
+
+console.log(evenOddSums([50, 60, 60, 45, 71]));
