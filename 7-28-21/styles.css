@@ -1,0 +1,23 @@
+body {
+    background-color: #94C9A9;
+    display: flex;
+}
+
+.container {
+    width: 250px;
+    background-color: #C6ECAE;
+    border-radius: 20px;
+    margin: 60px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+
+}
+
+.button {
+    background-color: #FE5F55;
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    align-self: center;
+}
