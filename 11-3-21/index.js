@@ -41,4 +41,5 @@ function getScore(n) {
   return score;
 }
 
-console.log(getScore(6));
+// console.log(getScore(6));
+
