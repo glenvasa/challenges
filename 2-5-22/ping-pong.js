@@ -25,22 +25,64 @@
 // The final rally always ends with the ball on the floor.
 // All input is valid.
 
-
 function pingPong(sounds) {
-    
-    //return "ping" or "pong"
+  let soundsArray = sounds.split("-");
+  let tiebreakArray = sounds.split("-")
+  let rallyArray = [];
+  let score = { ping: 0, pong: 0 };
+  let tiebreak;
+  let winner;
+
+  while (soundsArray.length > 0) {
+    if (soundsArray[0] === "ping" || soundsArray[0] === "pong") {
+      for (const shot of soundsArray) {
+        if (shot !== "ping" && shot !== "pong") {
+          const mistakeIndex = soundsArray.indexOf(shot);
+          const rally = soundsArray.slice(0, mistakeIndex);
+          rallyArray.push(rally);
+          soundsArray.splice(0, mistakeIndex);
+          break;
+        }
+      }
+    } else {
+      const nextPing = soundsArray.indexOf("ping");
+      const nextPong = soundsArray.indexOf("pong");
+      if (nextPing === -1 && nextPong === -1) {
+        soundsArray.splice(0, soundsArray.length);
+      } else if (nextPing < nextPong) {
+        soundsArray.splice(0, nextPing);
+      } else {
+        soundsArray.splice(0, nextPong);
+      }
+    }
   }
-  
+
+
+  for (const point of rallyArray) {
+    if(point[0] !== point[rallyArray.length - 1]){
+      let player = point[0]
+      score[player] += 1
+    }
+  }
+
+  for (let i=tiebreakArray.length-1; i>0; i--){
+    if(tiebreakArray[i] === 'ping' || tiebreakArray[i] === 'pong'){
+      const loser = tiebreakArray[i]
+      loser === 'ping' ? tiebreak = 'pong' : tiebreak = 'ping'
+      break
+    }
+  }
+
+  score.ping > score.pong
+    ? (winner = "ping")
+    : score.ping < score.pong
+    ? (winner = "pong")
+    : (winner = tiebreak);
+
+  return winner;
+}
 
 console.log(pingPong("ping-pong-ping-pong-bonk-bing-doof")); // "ping"
 console.log(pingPong("pong-ping-dong-ping-pong-tink-bonk-pong-ping-doof")); // "pong"
 console.log(pingPong("pong-ping-bink-ping-pong-donk")); // draw but return "ping" b/c "pong" hit last bad shot
-        
-
-   
-        
-
-   
-    
-         
-    
+console.log(pingPong("ping-pong-bink-pong-ping-donk")); // draw but return "pong" b/c "ping" hit last bad shot
